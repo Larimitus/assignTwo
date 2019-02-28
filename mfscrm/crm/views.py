@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 
@@ -23,3 +23,9 @@ def customer_edit(request, pk):
         # edit
         form = CustomerForm(instance=customer)
         return render(request, 'crm/customer_edit.html', {'form': form})
+
+
+def customer_delete(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    customer.delete()
+    return redirect('crm:customer_list')

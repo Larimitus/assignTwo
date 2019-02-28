@@ -57,10 +57,10 @@
                             <td>{{customer.state}}</td>
                             <td>{{customer.zipcode}}</td>
                             <td>
-                                <a href= "{% url 'crm:customer_edit' pk=customer.pk %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'crm:customer_edit' pk=customer.pk %}" class="btn btn-warning">Edit</a>
                             </td>
                             <td>
-                                <a href=""
+                                <a href="{% url 'crm:customer_delete' pk=customer.pk %}"
                                    onclick="return confirm('Are you sure you want to delete?')"
                                    class="btn btn-danger">Delete</a>
                             </td>
