@@ -14,7 +14,7 @@ class Customer(models.Model):
     state = models.CharField(max_length=50)
     zipcode = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=50)
-    created_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(auto_now_add=True)
 
     def created(self):

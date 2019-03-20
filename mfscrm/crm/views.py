@@ -40,3 +40,25 @@ def customer_delete(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     customer.delete()
     return redirect('crm:customer_list')
+
+
+@login_required
+def service_list(request):
+    services = Service.objects.filter(created_date__lte=timezone.now())
+    return render(request, 'crm/service_list.html', {'service': services})
+
+
+@login_required
+def service_new(request):
+    if request.method == "POST":
+        form = ServiceForm(request.POST)
+    if form.is_valid():
+        service = form.save(commit=False)
+        service.created_date = timezone.now()
+        service.save()
+        services = Service.objects.filter(created_date__lte=timezone.now())
+        return render(request, 'crm/service_list.html', {'services': services})
+    else:
+        form = ServiceForm()
+        # print("Else")
+        return render(request, 'crm/service_new.html', {'form': form})
