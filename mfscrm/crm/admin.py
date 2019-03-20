@@ -15,6 +15,7 @@ class ServiceList(admin.ModelAdmin):
     search_fields = ('cust_name',)
     ordering = ['cust_name']
 
+
 class ProductList(admin.ModelAdmin):
     list_display = ('cust_name', 'product', 'pickup_time')
     list_filter = ('cust_name', 'pickup_time')
