@@ -40,13 +40,14 @@ def customer_edit(request, pk):
 def customer_delete(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     customer.delete()
-    return redirect('crm:customer_list')
+    customers = Customer.object.filter(created_date__lte=timezone.now())
+    return render(request, 'crm/customer_list.html', {'customers': customers})
 
 
 @login_required
 def service_list(request):
     services = Service.objects.filter(created_date__lte=timezone.now())
-    return render(request, 'crm/service_list.html', {'service': services})
+    return render(request, 'crm/service_list.html', {'services': services})
 
 
 @login_required
@@ -85,12 +86,14 @@ def service_edit(request, pk):
 def service_delete(request, pk):
     service = get_object_or_404(Service, pk=pk)
     service.delete()
-    return redirect('crm:service_list')
+    services = Service.object.filter(created__date__lte=timezone.now())
+    return render(request, 'crm/service_list.html', {'services': services})
+
 
 @login_required
 def product_list(request):
-    products = Service.objects.filter(created_date__lte=timezone.now())
-    return render(request, 'crm/product_list.html', {'product': products})
+    products = Product.objects.filter(created_date__lte=timezone.now())
+    return render(request, 'crm/product_list.html', {'products': products})
 
 
 @login_required
@@ -129,7 +132,8 @@ def product_edit(request, pk):
 def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product.delete()
-    return redirect('crm:product_list')
+    products = Product.object.filter(created__date__lte=timezone.now())
+    return render(request, 'crm/product_list.html', {'products': products})
 
 
 @login_required
